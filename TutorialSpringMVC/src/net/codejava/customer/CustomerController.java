@@ -25,20 +25,20 @@ public class CustomerController {
         return mav;
     }
 
-    @RequestMapping("new")
+    @RequestMapping("/new")
     public String newCustomerForm(Map<String, Object> model) {
         Customer customer = new Customer();
         model.put("customer", customer);
         return "new_customer";
     }
 
-    @RequestMapping(value = "save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveCustomer(@ModelAttribute("customer") Customer customer) {
         customerService.save(customer);
         return "redirect:/";
     }
 
-    @RequestMapping("edit")
+    @RequestMapping("/edit")
     public ModelAndView editCustomerForm(@RequestParam long id) {
         ModelAndView mav = new ModelAndView("edit_customer");
         Customer customer = customerService.get(id);
@@ -47,13 +47,13 @@ public class CustomerController {
         return mav;
     }
 
-    @RequestMapping("delete")
+    @RequestMapping("/delete")
     public String deleteCustomerForm(@RequestParam long id) {
         customerService.delete(id);
         return "redirect:/";
     }
 
-    @RequestMapping("search")
+    @RequestMapping("/search")
     public ModelAndView search(@RequestParam String keyword) {
         List<Customer> result = customerService.search(keyword);
         ModelAndView mav = new ModelAndView("search");
